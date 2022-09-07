@@ -2,7 +2,7 @@ import { NodeTypes, RootNode, ChildNode } from "./parser";
 
 interface VisitorOptions {
   enter: (node: RootNode | ChildNode, parent: RootNode | ChildNode | undefined) => void;
-  exit: (node: RootNode | ChildNode, parent: RootNode | ChildNode | undefined) => void;
+  exit?: (node: RootNode | ChildNode, parent: RootNode | ChildNode | undefined) => void;
 }
 
 export interface Visitor {
@@ -29,7 +29,7 @@ export function traverser(ast: RootNode, visitor: Visitor) {
 
 
     if (node.type === NodeTypes.Number) {
-      console.log("numbner", node);
+      // console.log("numbner", node);
     } else if (node.type === NodeTypes.CallExpression) {
       traverserArray(node.params, node)
     } else if (node.type === NodeTypes.Root) {
@@ -38,7 +38,7 @@ export function traverser(ast: RootNode, visitor: Visitor) {
 
 
     // exit
-    if (visitorObj) {
+    if (visitorObj && visitorObj.exit) {
       visitorObj.exit(node, parent);
     }
   }
