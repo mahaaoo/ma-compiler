@@ -1,16 +1,16 @@
 import {Token, TokenTypes} from './tokenizer';
 
 export enum NodeTypes {
-  Root,
-  Number,
-  CallExpression,
+  Root = "Root",
+  Number = "Number",
+  CallExpression = "CallExpression",
 }
 
 export interface Node {
   type: NodeTypes,
 }
 
-type ChildNode = NumberNode | CallExpressionNode;
+export type ChildNode = NumberNode | CallExpressionNode;
 
 export interface RootNode extends Node {
   body: ChildNode[];
